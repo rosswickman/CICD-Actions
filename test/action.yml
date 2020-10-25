@@ -1,25 +1,17 @@
 ---
 
-name: 'Hello World'
-description: 'Greet someone'
-inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-outputs:
-  random-number: 
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-id }}
+name: 'My Super Linter'
+description: 'Runs Github Super-Linter'
+author: '@rosswickman'
+# outputs:
+#   random-number: 
+#     description: "Random number"
+#     value: ${{ steps.random-number-generator.outputs.random-id }}
 runs:
-  using: "composite"
-  steps: 
-    - run: echo Hello ${{ inputs.who-to-greet }}.
-      shell: bash
-    - id: random-number-generator
-      run: echo "::set-output name=random-id::$(echo $RANDOM)"
-      shell: bash
-    - run: chmod +x ${{ github.action_path }}/src/test.sh
-      shell: bash
-    - run: ${{ github.action_path }}/src/test.sh
-      shell: bash
+  steps:
+    - name: Checkout repo
+      uses: actions/checkout@master
+
+    - name: Run Superlinter
+      id: superlinter
+      uses: github/super-linter@v3.13.2
