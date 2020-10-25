@@ -3,10 +3,8 @@
 name: 'My Super Linter'
 description: 'Runs Github Super-Linter'
 author: '@rosswickman'
-# outputs:
-#   random-number: 
-#     description: "Random number"
-#     value: ${{ steps.random-number-generator.outputs.random-id }}
+
+## THIS WORKS
 runs:
   using: 'docker'
   image: 'docker://ghcr.io/github/super-linter:v3'
