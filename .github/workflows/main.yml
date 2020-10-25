@@ -1,5 +1,5 @@
 ---
-name: Linting Only
+name: All - Linting
 
 on: push
     
