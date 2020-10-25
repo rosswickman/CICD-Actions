@@ -8,10 +8,5 @@ author: '@rosswickman'
 #     description: "Random number"
 #     value: ${{ steps.random-number-generator.outputs.random-id }}
 runs:
-  steps:
-    - name: Checkout repo
-      uses: actions/checkout@master
-
-    - name: Run Superlinter
-      id: superlinter
-      uses: github/super-linter@v3.13.2
+  using: 'docker'
+  image: 'docker://ghcr.io/github/super-linter:v3'
