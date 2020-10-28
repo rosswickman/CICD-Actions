@@ -20,5 +20,10 @@ runs:
   steps: 
     - run: echo Delivering templates to bucket ${{inputs.bucket}}
       shell: bash
-    - run: echo aws s3 sync ./ s3://${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}} --region ${{inputs.region}}
+    - run: |
+        apk add --no-cache python3 py3-pip
+        pip3 install --upgrade pip
+        pip3 install awscli
+        cd ${{inputs.cft-dir}}
+        echo aws s3 sync . s3://${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}} --region ${{inputs.region}}
       shell: bash
