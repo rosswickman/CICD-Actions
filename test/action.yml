@@ -6,19 +6,19 @@ inputs:
   bucket:
     description: 'destination bucket for delivery'
     required: true
-    default: 'cicd.rwick.it'
+    default: 'default-bucket'
   prefix:
     description: 'prefix/folder for location of template'
     required: true
-    default: 'stacksets'
+    default: 'default-prefix'
   region:
     description: 'region of bucket and delivery'
     required: true
-    default: 'us-west-2'
+    default: 'default-region'
   cft-dir:
     description: 'directory of templates to be delivered'
     required: true
-    default: 'cloudformation'
+    default: 'default-dir'
 outputs:
   delivery-status: 
     description: "delivery status"
