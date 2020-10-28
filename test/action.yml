@@ -26,7 +26,7 @@ outputs:
 runs:
   using: "composite"
   steps: 
-    - run: echo "Delivering templates to: [ Bucket: ${{ inputs.bucket }}/${{ inputs.prefix }}."
+    - run: echo "Delivering templates to: [ Bucket: ${{ inputs.bucket }}/${{ inputs.prefix }} ]."
       shell: bash
     - run: echo "aws s3 sync ./ s3://${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}} --region ${{inputs.region}}"
       shell: bash
