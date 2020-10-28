@@ -6,19 +6,15 @@ inputs:
   bucket:
     description: 'destination bucket for delivery'
     required: true
-    default: 'default-bucket'
   prefix:
     description: 'prefix/folder for location of template'
     required: true
-    default: 'default-prefix'
   region:
     description: 'region of bucket and delivery'
     required: true
-    default: 'default-region'
   cft-dir:
     description: 'directory of templates to be delivered'
     required: true
-    default: 'default-dir'
 runs:
   using: "composite"
   steps: 
