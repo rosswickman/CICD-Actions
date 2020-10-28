@@ -26,3 +26,5 @@ runs:
         #pip3 install awscli
         echo aws s3 sync ${{inputs.cft-dir}} s3://${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}} --region ${{inputs.region}}
       shell: bash
+    - run: echo Template(s) URL: https://${{inputs.bucket}}.s3.amazonaws.com/${{inputs.prefix}}/${{github.event.repository.name}}/{{TEMPLATE-NAME}}.yml
+      shell: bash
