@@ -19,10 +19,17 @@ inputs:
     description: 'directory of templates to be delivered'
     required: true
     default: 'cloudformation'
+outputs:
+  delivery-status: 
+    description: "delivery status"
+    value: ${{ steps.delivery-status.outputs.status }}
 runs:
   using: "composite"
   steps: 
     - run: echo "Delivering templates to: [ Bucket: ${{ inputs.bucket }}/${{ inputs.prefix }}."
       shell: bash
     - run: echo "aws s3 sync ./ s3://${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}} --region ${{inputs.region}}"
+      shell: bash
+    - id: delivery-status
+      run: echo "::set-output name=status::$(echo Deliver successful?)"
       shell: bash
