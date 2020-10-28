@@ -1,1 +1,9 @@
 ---
+
+name: 'Super Linter'
+description: 'Runs Github Super-Linter'
+author: '@rosswickman'
+
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/github/super-linter:v3'
