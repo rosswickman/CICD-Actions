@@ -2,6 +2,7 @@
 
 name: 'Deliver Artifacts'
 description: 'Delivers CloudFormation or Terraform Templates to S3 bucket for deployment in console or CICD'
+author: '@rosswickman'
 inputs:
   bucket:
     description: 'destination bucket for delivery'
