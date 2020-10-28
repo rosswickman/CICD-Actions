@@ -18,7 +18,7 @@ inputs:
 runs:
   using: "composite"
   steps: 
-    - run: echo Delivering templates to bucket ${{inputs.bucket}}
+    - run: echo Delivering templates to ${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}}
       shell: bash
     - run: |
         #apk add --no-cache python3 py3-pip
