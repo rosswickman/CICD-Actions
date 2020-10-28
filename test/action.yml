@@ -19,17 +19,9 @@ inputs:
     description: 'directory of templates to be delivered'
     required: true
     default: 'default-dir'
-outputs:
-  delivery-status: 
-    description: "delivery status"
-    value: ${{ steps.delivery-status.outputs.status }}
 runs:
   using: "composite"
   steps: 
-    - run: echo Delivering templates to bucket: ${{ inputs.bucket }}
+    - run: echo Delivering templates to bucket ${{ inputs.bucket }}
       shell: bash
-    - run: echo "aws s3 sync ./ s3://${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}} --region ${{inputs.region}}"
-      shell: bash
-    - id: delivery-status
-      run: echo "::set-output name=status::$(echo Deliver successful?)"
-      shell: bash
+
