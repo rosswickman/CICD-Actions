@@ -1,0 +1,28 @@
+---
+
+name: 'Hello World'
+description: 'Delivers AWS CloudFormation Templates to S3 bucket for deployment in console or CICD'
+inputs:
+  bucket:
+    description: 'destination bucket for delivery'
+    required: true
+    default: 'cicd.rwick.it'
+  prefix:
+    description: 'prefix/folder for location of template'
+    required: true
+    default: 'stacksets'
+  region:
+    description: 'region of bucket and delivery'
+    required: true
+    default: 'us-west-2'
+  cft-dir:
+    description: 'directory of templates to be delivered'
+    required: true
+    default: 'cloudformation'
+runs:
+  using: "composite"
+  steps: 
+    - run: echo "Delivering templates to: [ Bucket: ${{ inputs.bucket }}/${{ inputs.prefix }}."
+      shell: bash
+    - run: echo "aws s3 sync ./ s3://${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}} --region ${{inputs.region}}"
+      shell: bash
