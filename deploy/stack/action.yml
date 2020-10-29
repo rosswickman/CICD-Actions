@@ -1,2 +1,9 @@
 ---
-## This is the action for the deployment of an individual stack
+name: 'Deploy Stack'
+description: ''
+author: '@rosswickman'
+runs:
+  using: "composite"
+  steps: 
+    - run: echo Deploying stack to single account
+      shell: bash
