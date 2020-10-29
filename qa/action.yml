@@ -1,9 +1,11 @@
 ---
-
-name: 'Super Linter'
+name: 'Quality Assurance'
 description: 'Runs Github Super-Linter'
 author: '@rosswickman'
 
 runs:
+  steps: 
+    - run: echo Using SuperLinter image to do some work
+      shell: bash
   using: 'docker'
   image: 'docker://ghcr.io/github/super-linter:v3'
