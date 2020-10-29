@@ -1,2 +1,9 @@
 ---
-## This is the action for the reporting the status stack and stackset deployment
+name: 'Check Status'
+description: ''
+author: '@rosswickman'
+runs:
+  using: "composite"
+  steps: 
+    - run: echo Checking Status of deployed stackset
+      shell: bash
