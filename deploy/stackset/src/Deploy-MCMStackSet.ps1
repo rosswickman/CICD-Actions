@@ -115,12 +115,12 @@ function Get-MCMStackSetParams {
     # $stackSetParams += $application
 
     $cid = New-Object -TypeName Amazon.CloudFormation.Model.Parameter
-    $cid.ParameterKey='pCidValue'
+    $cid.ParameterKey="pCidValue"
     $cid.ParameterValue=$Customer.CID
     $stackSetParams += $cid
 
     $customer = New-Object -TypeName Amazon.CloudFormation.Model.Parameter
-    $customer.ParameterKey='pCustomerValue'
+    $customer.ParameterKey="pCustomerValue"
     $customer.ParameterValue=$Customer.CID
     $stackSetParams += $cid
 
