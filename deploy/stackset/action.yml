@@ -2,12 +2,16 @@
 name: 'Deploy Stackset'
 description: ''
 author: '@rosswickman'
+inputs:
+  config-dir:
+    description: 'directory of configuration json'
+    required: true
 runs:
   using: "composite"
   steps: 
     - run: |
-        wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/deploy/stackset/src/Start-MCMStackSetOperations.ps1
-        wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/deploy/stackset/src/Deploy-MCMStackSet.ps1
+        wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/deploy/stackset/src/Start-MCMStackSetOperations.ps1 -P ${{inputs.config-dir}}
+        wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/deploy/stackset/src/Deploy-MCMStackSet.ps1 -P ${{inputs.config-dir}}
         chmod +rx *.ps1
         ./Start-MCMStackSetOperations.ps1 deploy
       shell: pwsh
