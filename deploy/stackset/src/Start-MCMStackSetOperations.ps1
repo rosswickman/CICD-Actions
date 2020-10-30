@@ -3,7 +3,7 @@ Param(
     [Parameter(Mandatory=$true,Position=0)]
     [string] $Operation
 )
-$config = (Get-Content -Raw config.json) -join "`n" | convertfrom-json
+$config = (Get-Content -Raw ./config.json) -join "`n" | convertfrom-json
 
 function Start-MCMStackSetOperations {
     if($config.Customers.length -eq 0){
