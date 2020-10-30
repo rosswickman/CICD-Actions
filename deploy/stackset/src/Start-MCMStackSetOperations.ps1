@@ -21,7 +21,7 @@ function Start-MCMStackSetOperations {
         }
     }
 
-    if($Operation.ToLower() -eq "deploy" -And $deploy){
+    if($deploy){
         #write-host 'will deploy'
         $deploy | ForEach-Object -Parallel {
             Import-Module AWSPowerShell.NetCore
@@ -30,7 +30,7 @@ function Start-MCMStackSetOperations {
         }
     }
 
-    if($Operation.ToLower() -eq "update" -And $update){
+    if($update){
         #write-host 'will update'
         $update | ForEach-Object -Parallel {
             Import-Module AWSPowerShell.NetCore
@@ -39,7 +39,7 @@ function Start-MCMStackSetOperations {
         }
     }
 
-    if($Operation.ToLower() -eq "remove" -And $remove){
+    if($remove){
         #write-host 'will remove'
         $remove | ForEach-Object -Parallel {
             Import-Module AWSPowerShell.NetCore
