@@ -5,17 +5,17 @@ on: [push]
 jobs:
 
   qa:
+    name: SuperLinter
     if: always()
     runs-on: ubuntu-latest
-    name: SuperLinter
     steps:
       - uses: actions/checkout@v2
       - uses: github/super-linter@v3.13.2
   
   validate_checkov:
+    name: Checkov
     if: always()
     runs-on: ubuntu-latest
-    name: Checkov
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -28,9 +28,9 @@ jobs:
           #framework: terraform # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
           
   validate_cfn-nag:
+    name: Cfn-Nag
     if: always()
     runs-on: ubuntu-latest
-    name: Cfn-Nag
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -40,11 +40,11 @@ jobs:
           input_path: cloudformation
             
   deliver:
+    name: Deliver
     needs: [qa, validate_checkov, validate_cfn-nag]
     runs-on: ubuntu-latest
     container:
       image: grolston/awsci
-    name: Deliver
     steps:
       - uses: actions/checkout@v2
       - uses: rosswickman/cicd-actions/deliver@testing
@@ -58,20 +58,20 @@ jobs:
           cft-dir: 'cloudformation'
   
   test:
+    name: Test
     needs: [deliver]
     if: github.ref != 'refs/heads/master'
     runs-on: ubuntu-latest
-    name: Test
     steps:
       - uses: rosswickman/cicd-actions/test@testing
   
   deploy:
+    name: Deploy
     needs: [deliver]
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     container:
       image: rosswickman/awspscore
-    name: Deploy
     steps:
       - uses: actions/checkout@v2
       - uses: rosswickman/cicd-actions/deploy/stackset@testing
@@ -80,9 +80,11 @@ jobs:
          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   
   status:
+    name: Status
     needs: [deploy]
     runs-on: ubuntu-latest
-    name: Status
+    container:
+      image: rosswickman/awspscore
     steps:
       - uses: actions/checkout@v2
       - uses: rosswickman/cicd-actions/status@testing
