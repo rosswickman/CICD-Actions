@@ -1,20 +1,12 @@
 name: 'Validate Artifacts'
 description: 'Validates CloudFormation or Terraform Templates for security issues and quality'
 author: '@rosswickman'
-inputs:
-  cft-dir:
-    description: 'directory of templates to be delivered'
-    required: true
 runs:
   using: "composite"
   steps: 
-    - run: echo Running CFN-NAG on templates
+    - run: |
+        echo This action is replaced by the following Actions
+        echo stelligent/cfn_nag@master -- https://github.com/marketplace/actions/stelligent-cfn_nag
+        echo bridgecrewio/checkov-action@master -- https://github.com/marketplace/actions/checkov-github-action
       shell: bash
-    - run: echo Running Checkov on templates
-      shell: bash
-#     - run: |
-#         apk add ruby-webrick
-#         gem install cfn-nag
-#         cfn_nag_scan --input-path ${{inputs.cft-dir}}
-#       shell: bash
-    
+   
