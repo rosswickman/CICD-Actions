@@ -2,7 +2,11 @@
 name: 'Quality Assurance'
 description: 'Runs Github Super-Linter'
 author: '@rosswickman'
-
 runs:
-  using: 'docker'
-  image: 'docker://ghcr.io/github/super-linter:v3'
+  using: "composite"
+  steps: 
+    - run: |
+        echo This action is replaced by the following Actions
+        echo github/super-linter@v3.13.2 -- https://github.com/marketplace/actions/super-linter
+      shell: bash
+   
