@@ -24,8 +24,8 @@ function Deploy-MCMStackSet {
                 -PermissionModel 'service_managed' `
                 -TemplateURL $config.Service.TemplateUrl `
                 -Credential $AccountCred `
-                -Tag $(Get-MCMStackSetTags) `
-                -Parameters @( $cid ) | Out-Null
+                -Tag $(Get-MCMStackSetTags) | Out-Null
+                #-Parameters @( $cid ) | Out-Null
                 #-Parameters $(Get-MCMStackSetParams)| Out-Null
             Write-Host -ForegroundColor Blue $("INFO : {0} : Deploying StackSet {1}." -f $Customer.Name, $config.Service.StackSetName)
             Get-MCMStackSetDeployStatus
