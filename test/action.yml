@@ -5,5 +5,9 @@ author: '@rosswickman'
 runs:
   using: "composite"
   steps: 
-    - run: echo Test Stack
-      shell: bash
+    - run: |
+        wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/test/Test-MCMStack.ps1
+        chmod +rx *.ps1
+        ./Test-MCMStack.ps1
+      shell: pwsh
+
