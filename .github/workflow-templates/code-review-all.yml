@@ -32,17 +32,13 @@ jobs:
           #framework: terraform # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
             
   validate_cfn-nag:
+    if: always()
     runs-on: ubuntu-latest
-    container:
-      image: grolston/awsci
-    name: validate:cfn-nag
+    name: Cfn-Nag
     steps:
       - name: Checkout repo
-        uses: actions/checkout@master
-
-      - name: Run cfn-nag
-        id: cfn-nag
-        run: |
-          apk add ruby-webrick
-          gem install cfn-nag
-          cfn_nag_scan --input-path .
+        uses: actions/checkout@v2
+      - name: CFN-NAG
+        uses: stelligent/cfn_nag@master
+        with:
+          input_path: cloudformation
