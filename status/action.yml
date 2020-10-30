@@ -5,5 +5,8 @@ author: '@rosswickman'
 runs:
   using: "composite"
   steps: 
-    - run: echo Checking Status of deployed stackset
-      shell: bash
+    - run: |
+      wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/status/src/Get-MCMStackSetStatus.ps1
+      chmod +rx *.ps1
+      ./Get-MCMStackSetStatus.ps1
+    shell: pwsh
