@@ -10,6 +10,9 @@ function Deploy-MCMStackSet {
         Write-Host -ForegroundColor Blue $("INFO : {0} : StackSet {1} already deployed. Will attempt to update stackset." -f $Customer.Name, $config.Service.StackSetName)
         Update-MCMStackSet
     } else {
+        $cid = New-Object -TypeName Amazon.CloudFormation.Model.Parameter
+        $cid.ParameterKey="pCidValue"
+        $cid.ParameterValue=$Customer.CID
         try {
             New-CFNStackSet `
                 -StackSetName $config.Service.StackSetName `
@@ -22,7 +25,8 @@ function Deploy-MCMStackSet {
                 -TemplateURL $config.Service.TemplateUrl `
                 -Credential $AccountCred `
                 -Tag $(Get-MCMStackSetTags) `
-                -Parameters $(Get-MCMStackSetParams)| Out-Null
+                -Parameters @( $cid ) | Out-Null
+                #-Parameters $(Get-MCMStackSetParams)| Out-Null
             Write-Host -ForegroundColor Blue $("INFO : {0} : Deploying StackSet {1}." -f $Customer.Name, $config.Service.StackSetName)
             Get-MCMStackSetDeployStatus
         } catch {
