@@ -16,9 +16,7 @@ inputs:
     description: 'directory of templates to be delivered'
     required: true
 runs:
-  #using: "composite"
-  using: "docker"
-  image: grolston/awsci
+  using: "composite"
   steps: 
     - run: echo Delivering templates to -- ${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}}
       shell: bash
@@ -26,7 +24,7 @@ runs:
         #apk add --no-cache python3 py3-pip
         #pip3 install --upgrade pip
         #pip3 install awscli
-        aws s3 sync ${{inputs.cft-dir}} s3://${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}} --region ${{inputs.region}}
+        echo aws s3 sync ${{inputs.cft-dir}} s3://${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}} --region ${{inputs.region}}
       shell: bash
     - run: |
         echo TODO -- Implement loop for presenting direct links to each template in ${{inputs.cft-dir}} directory
