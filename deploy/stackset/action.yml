@@ -6,7 +6,7 @@ runs:
   using: "composite"
   steps: 
     - run: |
-        cd src
-        chmod +rx *.ps1
-        ./Start-MCMStackSetOperations.ps1 deploy
+        #cd src
+        #chmod +rx *.ps1
+        ./$GITHUB_ACTION_PATH/Start-MCMStackSetOperations.ps1 deploy
       shell: pwsh
