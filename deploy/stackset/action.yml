@@ -16,5 +16,5 @@ runs:
         #wget ${{GITHUB_ACTION_PATH}}/src/Deploy-MCMStackSet.ps1
         #chmod +rx *.ps1
         #./Start-MCMStackSetOperations.ps1
-        Write-Host ${{GITHUB_ACTION_PATH}}
+        Write-Host $GITHUB_ACTION_PATH
       shell: pwsh
