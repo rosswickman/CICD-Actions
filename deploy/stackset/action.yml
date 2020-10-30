@@ -6,7 +6,6 @@ runs:
   using: "composite"
   steps: 
     - run: |
-      
         wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/deploy/stackset/src/Start-MCMStackSetOperations.ps1
         wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/deploy/stackset/src/Deploy-MCMStackSet.ps1
         chmod +rx *.ps1
