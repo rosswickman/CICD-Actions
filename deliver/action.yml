@@ -17,8 +17,6 @@ inputs:
     required: true
 runs:
   using: "composite"
-  #using: 'docker'
-  #image: 'docker://grolston/awsci'
   steps: 
     - run: echo Delivering templates to -- ${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}}
       shell: bash
