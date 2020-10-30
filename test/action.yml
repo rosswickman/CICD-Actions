@@ -1,6 +1,6 @@
 ---
 name: 'Test Stack'
-description: ''
+description: 'Tests CloudFormation or Terraform Template as a single Stack in Testing Account'
 author: '@rosswickman'
 runs:
   using: "composite"
