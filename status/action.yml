@@ -1,6 +1,6 @@
 ---
 name: 'Check Status'
-description: ''
+description: 'Gets the status of previously deployed, removed, or updated CloudFormation StackSets'
 author: '@rosswickman'
 runs:
   using: "composite"
