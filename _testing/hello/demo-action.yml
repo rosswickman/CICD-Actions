@@ -1,0 +1,16 @@
+name: 'Hello Test'
+
+on: [push]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+    - uses: actions/checkout@v2
+    - id: foo
+      uses: rosswickman/cicd-actions/test/hello@testing
+      with:
+        who-to-greet: 'Wicky'
+    - run: echo random-number ${{ steps.foo.outputs.random-number }} 
+      shell: bash
