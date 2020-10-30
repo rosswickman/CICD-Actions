@@ -16,11 +16,10 @@ inputs:
     description: 'directory of templates to be delivered'
     required: true
 runs:
-  using: "composite"
-  #using: 'docker'
-  #image: 'docker://grolston/awsci'
-  #- run: echo Delivering templates to -- ${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}}
-  #  shell: bash
+  using: 'docker'
+  image: 'docker://grolston/awsci'
+  - run: echo Delivering templates to -- ${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}}
+   shell: bash
   - run: |
       docker run -i -t grolston/awsci
       #apk add --no-cache python3 py3-pip
