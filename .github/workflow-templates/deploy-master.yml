@@ -34,8 +34,6 @@ jobs:
   validate_cfn-nag:
     if: always()
     runs-on: ubuntu-latest
-    container:
-      image: grolston/awsci
     name: Cfn-Nag
     steps:
       - name: Checkout repo
