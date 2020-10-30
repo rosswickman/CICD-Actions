@@ -6,7 +6,7 @@ runs:
   using: "composite"
   steps: 
     - run: |
-      wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/status/Get-MCMStackSetStatus.ps1
-      chmod +rx *.ps1
-      ./Get-MCMStackSetStatus.ps1
-    shell: pwsh
+        wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/status/Get-MCMStackSetStatus.ps1
+        chmod +rx *.ps1
+        ./Get-MCMStackSetStatus.ps1
+      shell: pwsh
