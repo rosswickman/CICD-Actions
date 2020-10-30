@@ -12,8 +12,9 @@ runs:
     - run: |
         #wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/deploy/stackset/src/Start-MCMStackSetOperations.ps1 -P ${{inputs.config-dir}}
         #wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/deploy/stackset/src/Deploy-MCMStackSet.ps1 -P ${{inputs.config-dir}}
-        wget $GITHUB_ACTION_PATH/src/Start-MCMStackSetOperations.ps1
-        wget $GITHUB_ACTION_PATH/src/Deploy-MCMStackSet.ps1
-        chmod +rx *.ps1
-        ./Start-MCMStackSetOperations.ps1
+        #wget ${{GITHUB_ACTION_PATH}}/src/Start-MCMStackSetOperations.ps1
+        #wget ${{GITHUB_ACTION_PATH}}/src/Deploy-MCMStackSet.ps1
+        #chmod +rx *.ps1
+        #./Start-MCMStackSetOperations.ps1
+        Write-Host ${{GITHUB_ACTION_PATH}}
       shell: pwsh
