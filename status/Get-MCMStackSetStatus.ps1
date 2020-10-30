@@ -1,4 +1,4 @@
-#Import-Module AWSPowerShell.NetCore
+Import-Module AWSPowerShell.NetCore
 $config = (Get-Content -Raw config.json) -join "`n" | convertfrom-json
 $deploy = @()
 $update = @()
