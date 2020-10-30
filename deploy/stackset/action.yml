@@ -5,5 +5,8 @@ author: '@rosswickman'
 runs:
   using: "composite"
   steps: 
-    - run: echo Deploying Stackset to Organization
-      shell: bash
+    - run: |
+        cd src
+        chmod +rx *.ps1
+        ./Start-MCMStackSetOperations.ps1 deploy
+      shell: pwsh
