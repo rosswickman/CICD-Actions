@@ -1,0 +1,13 @@
+---
+name: 'Test Stack'
+description: 'Tests CloudFormation or Terraform Template as a single Stack in Testing Account'
+author: '@rosswickman'
+runs:
+  using: "composite"
+  steps: 
+    - run: |
+        wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/test/Test-MCMStack.ps1
+        chmod +rx *.ps1
+        ./Test-MCMStack.ps1
+      shell: pwsh
+

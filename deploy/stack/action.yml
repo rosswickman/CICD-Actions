@@ -1,0 +1,9 @@
+---
+name: 'Deploy Stack'
+description: ''
+author: '@rosswickman'
+runs:
+  using: "composite"
+  steps: 
+    - run: echo Deploying stack to single account
+      shell: bash

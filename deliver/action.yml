@@ -1,0 +1,32 @@
+---
+name: 'Deliver Artifacts'
+description: 'Delivers CloudFormation or Terraform Templates to S3 bucket for deployment in console or CICD'
+author: '@rosswickman'
+inputs:
+  bucket:
+    description: 'destination bucket for delivery'
+    required: true
+  prefix:
+    description: 'prefix/folder for location of template'
+    required: true
+  region:
+    description: 'region of bucket and delivery'
+    required: true
+  cft-dir:
+    description: 'directory of templates to be delivered'
+    required: true
+runs:
+  using: "composite"
+  steps: 
+    - run: echo Delivering templates to -- ${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}}
+      shell: sh
+    - run: |
+        apk add --no-cache python3 py3-pip
+        pip3 install --upgrade pip
+        pip3 install awscli
+        aws s3 sync ${{inputs.cft-dir}} s3://${{inputs.bucket}}/${{inputs.prefix}}/${{github.event.repository.name}} --region ${{inputs.region}}
+      shell: sh
+    - run: |
+        echo TODO -- Implement loop for presenting direct links to each template in ${{inputs.cft-dir}} directory
+        echo Template URL -- https://${{inputs.bucket}}.s3.amazonaws.com/${{inputs.prefix}}/${{github.event.repository.name}}/
+      shell: sh

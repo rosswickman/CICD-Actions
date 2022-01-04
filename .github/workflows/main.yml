@@ -1,0 +1,16 @@
+---
+name: Lint Project
+
+on: push
+    
+jobs:
+  superlinter:
+    runs-on: ubuntu-latest
+    name: superlinter
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@master
+
+      - name: Run Superlinter
+        id: superlinter
+        uses: github/super-linter@v3.13.2

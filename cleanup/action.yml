@@ -1,0 +1,9 @@
+---
+name: 'Cleanup Artifacts'
+description: ''
+author: '@rosswickman'
+runs:
+  using: "composite"
+  steps: 
+    - run: echo Cleanup templates
+      shell: bash

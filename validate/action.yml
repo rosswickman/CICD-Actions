@@ -1,0 +1,12 @@
+name: 'Validate Artifacts'
+description: 'Validates CloudFormation or Terraform Templates for security issues and quality'
+author: '@rosswickman'
+runs:
+  using: "composite"
+  steps: 
+    - run: |
+        echo This action is replaced by the following Actions
+        echo stelligent/cfn_nag@master -- https://github.com/marketplace/actions/stelligent-cfn_nag
+        echo bridgecrewio/checkov-action@master -- https://github.com/marketplace/actions/checkov-github-action
+      shell: bash
+   

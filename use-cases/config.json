@@ -1,0 +1,42 @@
+{
+    "RWickITServiceTemplate": "2020-10-01",
+    "Description": "Example Configuration File",
+    "Service": {
+        "Name": "name-of-service-deployed",
+        "Description": "Description of service deployed",
+        "StackSetName": "name-of-stackset",
+        "Version": "v1",
+        "TemplateUrl": "https://s3.us-east-2.amazonaws.com/bucketname/prefix/service-name/template-name.yml",
+        "GitURL": "https://github.com/URL OF PROJECT HOSTING TEMPLATE",
+        "Region": "us-west-2",
+        "ExecutionRole": "Name of role in destination account(s) with permissions to do actions",
+        "SessionName": "Session Name for CloudTrail Logging of assume actions",
+        "TestAccountId": "123456789001"
+
+    },
+    "Customers": [
+        {
+            "Name": "Test Customer 1",
+            "AccountId": "111111111111",
+            "OrgId": "o-xxxxxxxxx",
+            "DeployedOuID": "r-xxxx",
+            "DeployedRegions": "us-west-2",
+            "Status": "deploy",
+            "Retain": "false",
+            "CID": "11111",
+            "Environment": "Production",
+            "Application": ""
+        },{
+            "Name": "Test Customer 2",
+            "AccountId": "222222222222",
+            "OrgId": "o-xxxxxxxxxxx",
+            "DeployedOuID": "r-xxxx",
+            "DeployedRegions": "us-east-1",
+            "Status": "test",
+            "Retain": "false",
+            "CID": "22222",
+            "Environment": "Production",
+            "Application": ""
+        }
+    ]
+}

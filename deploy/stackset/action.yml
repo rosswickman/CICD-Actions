@@ -1,0 +1,14 @@
+---
+name: 'Deploy Stackset'
+description: ''
+author: '@rosswickman'
+runs:
+  using: "composite"
+  steps: 
+    - run: |
+        wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/deploy/stackset/Start-MCMStackSetOperations.ps1
+        wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/deploy/stackset/Deploy-MCMStackSet.ps1
+        wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/deploy/stackset/Remove-MCMStackSet.ps1
+        chmod +rx *.ps1
+        ./Start-MCMStackSetOperations.ps1
+      shell: pwsh

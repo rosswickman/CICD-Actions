@@ -1,0 +1,93 @@
+name: 'Master/Main Branch (Deploy)'
+
+on: [push]
+
+jobs:
+
+  qa:
+    name: SuperLinter
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: github/super-linter@v3.13.2
+  
+  validate_checkov:
+    name: Checkov
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: .
+          quiet: true
+          #skip_check: CKV_AWS_1 # optional: skip a specific check_id
+          #framework: terraform # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
+          
+  validate_cfn-nag:
+    name: Cfn-Nag
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: CFN-NAG
+        uses: stelligent/cfn_nag@master
+        with:
+          input_path: cloudformation
+            
+  deliver:
+    name: Deliver
+    needs: [qa, validate_checkov, validate_cfn-nag]
+    runs-on: ubuntu-latest
+    container:
+      image: grolston/awsci
+    steps:
+      - uses: actions/checkout@v2
+      - uses: rosswickman/cicd-actions/deliver@testing
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        with:
+          bucket: 'org.deployment.rwick.it'
+          prefix: 'stacksets'
+          region: 'us-west-2'
+          cft-dir: 'cloudformation'
+  
+  test:
+    name: Test
+    needs: [deliver]
+    if: github.ref != 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rosswickman/cicd-actions/test@testing
+  
+  deploy:
+    name: Deploy
+    needs: [deliver]
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    container:
+      image: rosswickman/awspscore
+    steps:
+      - uses: actions/checkout@v2
+      - uses: rosswickman/cicd-actions/deploy/stackset@testing
+        env:
+         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  
+  status:
+    name: Status
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    container:
+      image: rosswickman/awspscore
+    steps:
+      - uses: actions/checkout@v2
+      - uses: rosswickman/cicd-actions/status@testing
+        env:
+         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

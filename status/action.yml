@@ -1,0 +1,12 @@
+---
+name: 'Check Status'
+description: 'Gets the status of previously deployed, removed, or updated CloudFormation StackSets'
+author: '@rosswickman'
+runs:
+  using: "composite"
+  steps: 
+    - run: |
+        wget https://raw.githubusercontent.com/rosswickman/cicd-actions/testing/status/Get-MCMStackSetStatus.ps1
+        chmod +rx *.ps1
+        ./Get-MCMStackSetStatus.ps1
+      shell: pwsh
